@@ -15,15 +15,14 @@ body, html {
 /* Hero section con imagen de fondo */
 .hero-section {
   background: url('/img/backcourt.png') no-repeat center top/cover;
-
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
   padding: 20px;
   position: relative;
 }
-
 
 /* Overlay oscuro para contraste */
 .hero-section::before {
@@ -41,6 +40,7 @@ body, html {
   align-items: center;
   z-index: 1;
   position: relative;
+  width: 100%;
 }
 
 .logo {
@@ -66,6 +66,11 @@ body, html {
   background: rgba(255, 255, 255, 0.2);
 }
 
+.nav-top a.active {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Logo flotante */
 .logo-overlay {
   position: absolute;
   top: 5%;
@@ -77,6 +82,7 @@ body, html {
   filter: brightness(0) invert(1);
 }
 
+/* Título animado */
 .titulo-animado {
   position: absolute;
   top: 20%;
@@ -97,7 +103,7 @@ body, html {
 
 /* Texto central */
 .hero-text {
- position: absolute;
+  position: absolute;
   top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -140,6 +146,7 @@ body, html {
   background: #e67e22;
 }
 
+/* Sección informativa */
 .torneo-info {
   background-color: #111;
   color: #fff;
@@ -203,7 +210,6 @@ body, html {
   margin-top: 40px;
 }
 
-
 /* Footer */
 footer {
   text-align: center;
@@ -212,8 +218,25 @@ footer {
   font-size: 0.9em;
 }
 
+/* Estilo para sección invitación - igual que torneo-text */
+.hero-text.torneo-text,
+.hero-text.invitacion-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 40px auto;
+  padding: 20px;
+  max-width: 800px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  color: white;
+}
+
+/* Estilo para el título arriba en invitación */
 .arribita {
- position: absolute;
+  position: absolute;
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -221,7 +244,9 @@ footer {
   color: white;
   padding: 20px;
   max-width: 800px;
+  z-index: 2;
 }
+
 .arribita h1 {
   font-size: 3em;
   line-height: 1.2;
@@ -233,20 +258,28 @@ footer {
   font-style: italic;
 }
 
-/* === Responsive para tablet y móvil === */
+.arribita h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ====== RESPONSIVE ====== */
+
+/* Tablet */
 @media screen and (max-width: 768px) {
   .hero-section {
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 20px;
+    justify-content: flex-start;
+    padding-top: 100px;
   }
 
   .logo-overlay {
+    position: static;
+    transform: none;
     width: 100px;
-    top: 1%;
-    left: 1%;
-    transform: translate(0, 0);
+    margin-bottom: 15px;
   }
 
   .nav-top {
@@ -258,25 +291,16 @@ footer {
   .nav-top ul {
     flex-direction: column;
     gap: 10px;
-    padding: 0;
-    margin: 0;
   }
 
-  .nav-top li {
-    list-style: none;
-  }
-
-  .nav-top a {
-    font-size: 1em;
-    padding: 8px;
-    display: block;
-  }
-
+  /* Quitar posiciones absolutas y centrar en flujo */
   .titulo-animado {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
     font-size: 2.5em;
-    top: 8%;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 20px;
     text-align: center;
   }
 
@@ -287,7 +311,9 @@ footer {
     transform: none;
     margin: 20px auto;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
   }
 
   .hero-text h1 {
@@ -296,31 +322,40 @@ footer {
 
   .hero-text p {
     font-size: 1em;
-    padding: 0 10px;
   }
 
-  .cta-button {
-    font-size: 1em;
-    padding: 10px 20px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+  /* Invitación: sacar posición absoluta para que no se monte */
+  .arribita {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    max-width: 800px;
+    text-align: center;
+  }
+
+  .arribita h1 {
+    font-size: 2em;
+  }
+
+  .arribita h2 {
+    font-size: 1.2em;
   }
 }
 
+/* Móvil */
 @media screen and (max-width: 480px) {
   .logo-overlay {
-    width: 80px;
-    top: 0%;
-    left: 1%;
-    transform: translate(0, 0);
+    width: 160px;
+    margin-bottom: 10px;
   }
 
   .titulo-animado {
     font-size: 2em;
-    top: 6%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
   }
 
   .hero-text h1 {
@@ -329,10 +364,18 @@ footer {
 
   .hero-text p {
     font-size: 0.95em;
+    line-height: 1.4;
   }
 
-  .cta-button {
-    font-size: 0.9em;
-    padding: 8px 16px;
+  .reglas-3x3 li {
+    font-size: 0.95em;
+  }
+
+  .arribita h1 {
+    font-size: 1.5em;
+  }
+
+  .arribita h2 {
+    font-size: 1em;
   }
 }
